@@ -1,0 +1,44 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.themohitrao.feature_main'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 33
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation project(path: ':core-ui')
+    implementation project(path: ':core-utility')
+    implementation project(path: ':feature-main-common')
+    implementation project(path: ':core-models')
+
+    coreDependencies dependencies
+    testingDependencies dependencies
+    koinDependencies dependencies
+    liveDataDependencies dependencies
+    uiDependencies dependencies
+    rxJavaDependencies dependencies
+}

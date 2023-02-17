@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="next_joke_in_s_seconds">Next Joke in: %s seconds.</string>
+    <string name="and_here_is_the_joke_">And Here is the Joke!</string>
+    <string name="the_joke_app">The Joke App</string>
+</resources>

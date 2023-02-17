@@ -1,0 +1,9 @@
+rootProject.name = "TheJokeApp"
+include ':app'
+include ':core-network'
+include ':feature-main'
+include ':core-ui'
+include ':core-utility'
+include ':core-database'
+include ':feature-main-common'
+include ':core-models'

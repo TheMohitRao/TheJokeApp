@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:theme="@style/Theme.Material3.DayNight.NoActionBar">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_one"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_two"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_three"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_four"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".8" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#E0BBE4"
+        app:layout_constraintEnd_toEndOf="@id/gl_one"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#957DAD"
+        app:layout_constraintEnd_toEndOf="@id/gl_two"
+        app:layout_constraintStart_toStartOf="@id/gl_one" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#D291BC"
+        app:layout_constraintEnd_toEndOf="@id/gl_three"
+        app:layout_constraintStart_toStartOf="@id/gl_two" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#FEC8D8"
+        app:layout_constraintEnd_toEndOf="@id/gl_four"
+        app:layout_constraintStart_toStartOf="@id/gl_three" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#FFDFD3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_four" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/toolbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/the_joke_app"
+                android:textColor="#D291BC"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationViewTitle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:adjustViewBounds="true"
+                android:layout_marginStart="20dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title"
+                app:layout_constraintStart_toEndOf="@+id/tv_title"
+                app:layout_constraintTop_toTopOf="@id/tv_title"
+                app:lottie_loop="false"
+                app:lottie_autoPlay="false"
+                app:lottie_url="https://assets1.lottiefiles.com/packages/lf20_qy7gaf.json" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets6.lottiefiles.com/packages/lf20_nDuwaHydrY.json" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_next_joke_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_container" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_linear"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="@color/dodger_blue"
+        app:layout_constraintTop_toBottomOf="@+id/tv_next_joke_in"
+        app:trackColor="@android:color/transparent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationSearchingJokes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress_linear"
+        app:lottie_loop="false"
+        app:lottie_url="https://assets1.lottiefiles.com/packages/lf20_b4hn3bqt.json" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_jokes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/transparent"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress_linear"
+        app:spanCount="1"
+        tools:listitem="@layout/cell_user_info" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
