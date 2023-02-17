@@ -60,6 +60,8 @@ private fun Context.syncWorkNotification(): Notification {
         .build()
 }
 
+// This name should not be changed otherwise the app may have concurrent sync requests running
+const val SyncWorkName = "SyncWorkName"
 
 private const val WORKER_CLASS_NAME = "RouterWorkerDelegateClassName"
 

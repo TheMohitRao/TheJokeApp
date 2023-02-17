@@ -17,15 +17,14 @@
 package com.themohitrao.main_common.worker_util
 
 import android.content.Context
-import androidx.work.CoroutineWorker
-import androidx.work.ForegroundInfo
+import androidx.work.*
 import androidx.work.PeriodicWorkRequest.Companion.MIN_PERIODIC_INTERVAL_MILLIS
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkerParameters
+import com.google.common.util.concurrent.ListenableFuture
 import com.themohitrao.main_common.events.NextJokeIn
 import com.themohitrao.main_common.repository.JokeRepository
 import kotlinx.coroutines.*
 import org.greenrobot.eventbus.EventBus
+import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -70,7 +69,43 @@ class JokeSyncUpWorker(
             TimeUnit.MINUTES
         )
             .setConstraints(SyncConstraints)
+            .addTag(SyncWorkName)
             .setInputData(JokeSyncUpWorker::class.delegatedData())
             .build()
+    }
+}
+
+fun startJokeSyncWorker(context:Context){
+    WorkManager.getInstance(context).apply {
+        // Run sync on app startup and ensure only one sync worker runs at any time
+        enqueueUniquePeriodicWork(
+            SyncWorkName,
+            ExistingPeriodicWorkPolicy.KEEP,
+            JokeSyncUpWorker.startUpSyncWork()
+        )
+    }
+}
+
+fun stopJokeSyncWorker(context:Context){
+    WorkManager.getInstance(context).cancelAllWorkByTag(SyncWorkName)
+}
+
+fun isWorkScheduled(tag: String,context:Context): Boolean {
+    val instance: WorkManager = WorkManager.getInstance(context)
+    val statuses: ListenableFuture<List<WorkInfo>> = instance.getWorkInfosByTag(tag)
+    return try {
+        var running = false
+        val workInfoList: List<WorkInfo> = statuses.get()
+        for (workInfo in workInfoList) {
+            val state: WorkInfo.State = workInfo.state
+            running = state === WorkInfo.State.RUNNING || state === WorkInfo.State.ENQUEUED
+        }
+        running
+    } catch (e: ExecutionException) {
+        e.printStackTrace()
+        false
+    } catch (e: InterruptedException) {
+        e.printStackTrace()
+        false
     }
 }

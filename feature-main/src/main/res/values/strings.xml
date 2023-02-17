@@ -4,4 +4,6 @@
     <string name="next_joke_in_s_seconds">Next Joke in: %s seconds.</string>
     <string name="and_here_is_the_joke_">And Here is the Joke!</string>
     <string name="the_joke_app">The Joke App</string>
+    <string name="stop_fetching_jokes">STOP FETCHING JOKES</string>
+    <string name="start_fetching_jokes">START FETCHING JOKES</string>
 </resources>

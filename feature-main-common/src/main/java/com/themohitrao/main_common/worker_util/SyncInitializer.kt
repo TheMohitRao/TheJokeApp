@@ -32,23 +32,11 @@ object Sync {
     }
 }
 
-// This name should not be changed otherwise the app may have concurrent sync requests running
-internal const val SyncWorkName = "SyncWorkName"
-
 /**
  * Registers work to sync the data layer periodically on app startup.
  */
 class SyncInitializer : Initializer<Sync> {
     override fun create(context: Context): Sync {
-        WorkManager.getInstance(context).apply {
-            // Run sync on app startup and ensure only one sync worker runs at any time
-            enqueueUniquePeriodicWork(
-                SyncWorkName,
-                ExistingPeriodicWorkPolicy.KEEP,
-                JokeSyncUpWorker.startUpSyncWork()
-            )
-        }
-
         return Sync
     }
 

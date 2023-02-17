@@ -1,6 +1,7 @@
 package com.themohitrao.core_ui
 
 import android.graphics.Color
+import android.os.SystemClock
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -36,4 +37,18 @@ fun LottieAnimationView.playSafeAnimation(){
 fun LottieAnimationView.playViaUrl(url:String){
     this.setAnimationFromUrl(url)
     this.playSafeAnimation()
+}
+
+private const val CTA_DEBOUNCE_TIME_IN_MILLIS = 1000L
+fun View.setDebounceClickListener(action: (view: View) -> Unit) {
+    this.setOnClickListener(object : View.OnClickListener {
+
+        private var lastClickTime: Long = 0
+
+        override fun onClick(v: View) {
+            if (SystemClock.elapsedRealtime() - lastClickTime < CTA_DEBOUNCE_TIME_IN_MILLIS) return
+            else action(v)
+            lastClickTime = SystemClock.elapsedRealtime()
+        }
+    })
 }

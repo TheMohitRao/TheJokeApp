@@ -98,14 +98,14 @@
                 android:id="@+id/animationViewTitle"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:adjustViewBounds="true"
                 android:layout_marginStart="20dp"
+                android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="@id/tv_title"
                 app:layout_constraintStart_toEndOf="@+id/tv_title"
                 app:layout_constraintTop_toTopOf="@id/tv_title"
-                app:lottie_loop="false"
                 app:lottie_autoPlay="false"
+                app:lottie_loop="false"
                 app:lottie_url="https://assets1.lottiefiles.com/packages/lf20_qy7gaf.json" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -157,10 +157,37 @@
         android:layout_height="0dp"
         android:background="@color/transparent"
         android:orientation="vertical"
+        android:layout_marginBottom="10dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sync"
         app:layout_constraintTop_toBottomOf="@+id/progress_linear"
         app:spanCount="1"
         tools:listitem="@layout/cell_user_info" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_sync"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="15dp"
+            android:id="@+id/tv_btn_text"
+            android:text="@string/stop_fetching_jokes"
+            android:textSize="20sp"
+            android:textColor="#D291BC"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
