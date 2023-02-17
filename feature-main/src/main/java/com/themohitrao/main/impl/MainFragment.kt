@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.themohitrao.core_models.JokeDataModel
 import com.themohitrao.core_ui.BaseEdgeEffectFactory
 import com.themohitrao.core_ui.playSafeAnimation
+import com.themohitrao.core_ui.setDebounceClickListener
 import com.themohitrao.core_ui.snackBar
 import com.themohitrao.feature_main.R
 import com.themohitrao.feature_main.databinding.FragmentMainBinding
@@ -59,15 +60,23 @@ class MainFragment : Fragment() {
     }
 
     private fun setUpListeners(binding: FragmentMainBinding) {
-        binding.btnSync.setOnClickListener {
+        binding.btnSync.setDebounceClickListener {
             if (isWorkScheduled(SyncWorkName, requireContext())) {
                 binding.tvBtnText.text = getString(R.string.start_fetching_jokes)
                 stopJokeSyncWorker(requireContext())
-                binding.tvNextJokeIn.text = ""
+                lifecycleScope.launch {
+                    delay(2000)
+                    binding.tvNextJokeIn.text = ""
+                }
             } else {
                 binding.tvBtnText.text = getString(R.string.stop_fetching_jokes)
                 startJokeSyncWorker(requireContext())
             }
+        }
+
+        binding.animationViewTitle.setDebounceClickListener {
+            binding.animationViewTitle.playSafeAnimation()
+            playSound()
         }
 
     }
@@ -105,7 +114,6 @@ class MainFragment : Fragment() {
         lifecycleScope.launch {
             delay(1500)
             binding.tvNextJokeIn.text = if (secondsToNextJoke == 0) {
-                binding.animationViewTitle.isVisible = true
                 binding.animationViewTitle.playSafeAnimation()
                 playSound()
                 getString(R.string.and_here_is_the_joke_)
