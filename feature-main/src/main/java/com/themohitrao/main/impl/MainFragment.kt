@@ -86,7 +86,7 @@ class MainFragment : Fragment() {
             processNewDataList(binding,it)
         }
         mainViewModel.errorValue.observe(viewLifecycleOwner) {
-            (it ?: getString(R.string.something_went_wrong)).snackBar(binding.root)
+            (it?.toString() ?: getString(R.string.something_went_wrong)).snackBar(binding.root)
         }
         mainViewModel.nextJokeInSeconds.observe(viewLifecycleOwner) {
             it?.let {

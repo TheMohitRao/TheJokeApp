@@ -11,28 +11,19 @@ class JokeRepository(
     private val jokeDataSource: JokeDataSource
 ) {
 
-    suspend fun getNewJoke(): Boolean {
-        jokeDataSource.getNewJoke()?.let {
-            val newData = JokeDataModel(System.currentTimeMillis(), it)
-            insertNewJoke(newData)
-            if (getAllJokes().size > 10) {
-                removeEarliestJoke()
-            }
-            EventBus.getDefault().post(RefreshJokeList())
-            return true
-        }
-        return false
+    suspend fun getNewJoke(): String? {
+        return jokeDataSource.getNewJoke()
     }
 
     suspend fun getAllJokes(): List<JokeDataModel> {
         return jokeDao.getAllJokes()
     }
 
-    private suspend fun insertNewJoke(joke: JokeDataModel) {
+    internal suspend fun insertNewJoke(joke: JokeDataModel) {
         jokeDao.insertJokeData(joke)
     }
 
-    private suspend fun removeEarliestJoke() {
+    internal suspend fun removeEarliestJoke() {
         jokeDao.removeEarliestJoke()
     }
 

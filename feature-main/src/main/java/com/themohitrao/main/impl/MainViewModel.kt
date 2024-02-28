@@ -14,7 +14,7 @@ class MainViewModel(
 ) : ViewModel() {
 
     val userList = MutableLiveData<List<JokeDataModel>>()
-    val errorValue = SingleLiveEvent<String?>()
+    val errorValue = SingleLiveEvent<Any?>()
     val nextJokeInSeconds = SingleLiveEvent<Int>()
 
     fun fetchUsers() {

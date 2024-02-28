@@ -22,6 +22,7 @@ import androidx.work.PeriodicWorkRequest.Companion.MIN_PERIODIC_INTERVAL_MILLIS
 import com.google.common.util.concurrent.ListenableFuture
 import com.themohitrao.main_common.events.NextJokeIn
 import com.themohitrao.main_common.repository.JokeRepository
+import com.themohitrao.main_common.use_case.FetchOneJokeUseCase
 import kotlinx.coroutines.*
 import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.ExecutionException
@@ -34,7 +35,7 @@ import java.util.concurrent.TimeUnit
 class JokeSyncUpWorker(
     private val appContext: Context,
     workerParams: WorkerParameters,
-    private val jokeRepository: JokeRepository,
+    private val fetchOneJokeUseCase: FetchOneJokeUseCase,
     private val ioDispatcher: CoroutineDispatcher,
 ) : CoroutineWorker(appContext, workerParams) {
 
@@ -56,7 +57,7 @@ class JokeSyncUpWorker(
             EventBus.getDefault().post(NextJokeIn((1200 - i)%60))
             delay(1000)
             if(i%60 == 0){
-                successList.add(jokeRepository.getNewJoke())
+                successList.add(fetchOneJokeUseCase.fetchOneJoke())
             }
         }
         return successList
